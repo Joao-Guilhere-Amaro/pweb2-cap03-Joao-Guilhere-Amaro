@@ -62,6 +62,13 @@ const server = http.createServer((req, res) => {
         res.end(`Item ${id} atualizado`);
         return;
     }
+    if(req.method === "DELETE" && req.url.startsWith('/itens/')){
+        const parte = req.url.split('/');
+        const id = parte[2];
+        res.writeHead(204);
+        res.end();
+        return;
+    }
     res.end();
 });
 
