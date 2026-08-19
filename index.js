@@ -28,7 +28,7 @@ const PORT = process.env.PORT || 3000;
 const server = http.createServer((req, res) => {
     if(req.method === "GET" && req.url ==="/"){
        
-        res.writeHead(200, {"Content-Type": "text"});
+        res.writeHead(200, {"Content-Type": "text/plain"});
         res.end('Olá, Mundo!');
         return;
     }
@@ -72,6 +72,7 @@ const server = http.createServer((req, res) => {
     if(req.method === "PATCH" && req.url === "/config"){
         res.writeHead(200, {'content-type': 'text/plain'});
         res.end('Configuração atualizada')
+        return;
     }
     if(req.method === "HEAD" && req.url === "/status"){
         res.writeHead(200, {'X-Status': 'ok'});
@@ -109,7 +110,7 @@ const server = http.createServer((req, res) => {
         }
         return;
     }
-     res.end();
+    res.writeHead(404, {'content-type': 'text/plain'});
+    res.end('Rota não encontrada');
 });
-
 server.listen(PORT, () => console.log(`Servidor em http://localhost:${PORT}`));
