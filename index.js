@@ -94,6 +94,21 @@ const server = http.createServer((req, res) => {
         }
         return;
     }
+    if(req.method === "GET" && req.url === "/secreto"){
+        const senha = req.headers['x-senha'];
+        if(senha === "1234"){
+            res.writeHead(200,{
+                'content-type': 'text/plain'
+            });
+            res.end('Acesso liberado');
+        }else{
+            res.writeHead(401, {
+                'content-type': 'text/plain'
+            });
+            res.end('Não autorizado');
+        }
+        return;
+    }
      res.end();
 });
 
