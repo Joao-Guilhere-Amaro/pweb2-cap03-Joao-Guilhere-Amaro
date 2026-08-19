@@ -69,6 +69,10 @@ const server = http.createServer((req, res) => {
         res.end();
         return;
     }
+    if(req.method === "PATCH" && req.url === "/config"){
+        res.writeHead(200, {'content-type': 'text/plain'});
+        res.end('Configuração atualizada')
+    }
     res.end();
 });
 
