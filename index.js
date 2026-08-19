@@ -76,8 +76,25 @@ const server = http.createServer((req, res) => {
     if(req.method === "HEAD" && req.url === "/status"){
         res.writeHead(200, {'X-Status': 'ok'});
         res.end();
+        return;
     }
-    res.end();
+   
+    if(req.method === "GET" && req.url === "/agente"){
+        const agente = req.headers['user-agent'] || '';
+        if(agente.toLowerCase().includes('curl')){
+            res.writeHead(200, {'content-type': 'text/plain'});
+            res.end('Você é o cURL');
+        }
+        else if(agente.toLowerCase().includes('chrome')){
+            res.writeHead(200, {'content-type': 'text/plain'});
+            res.end('Você é um navegador');
+        } else{
+            res.writeHead(200, {'content-type': 'text/plain'});
+            res.end('Agente desconhecido');
+        }
+        return;
+    }
+     res.end();
 });
 
 server.listen(PORT, () => console.log(`Servidor em http://localhost:${PORT}`));
