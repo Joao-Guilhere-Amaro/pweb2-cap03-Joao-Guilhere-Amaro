@@ -24,11 +24,18 @@ import http from 'node:http';
 const PORT = process.env.PORT || 3000;
 
 const server = http.createServer((req, res) => {
-    req.method === "GET" && req.url === "/sobre" 
-    res.writeHead(200, { "Content-Type": "text/html" }); 
-    res.end('<h1>Sobre</h1>'); 
-    
-  
+    if(req.method === "GET" && req.url ==="/"){
+       
+        res.writeHead(200, {"Content-Type": "text"});
+        res.end('Olá, Mundo!');
+        return;
+    }
+    if(req.method === "GET" && req.url ==="/sobre"){
+        res.writeHead(200, { "Content-Type": "text/html" }); 
+        res.end('<h1>Sobre</h1>'); 
+        return;
+    }
+    res.end();
 });
 
 server.listen(PORT, () => console.log(`Servidor em http://localhost:${PORT}`));
