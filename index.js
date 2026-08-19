@@ -44,6 +44,17 @@ const server = http.createServer((req, res) => {
         res.end(`Olá, ${nome}!`);
         return;
     }
+    if(req.method === "POST" && req.url === "/echo"){
+        let body = '';
+        req.on('data', (chunk) => {
+            body += chunk;
+        });
+        req.on('end', () => {
+            res.writeHead(200, {'Content-type': 'text/plain'});
+            res.end(body);
+        });
+        return;
+    }
     res.end();
 });
 
