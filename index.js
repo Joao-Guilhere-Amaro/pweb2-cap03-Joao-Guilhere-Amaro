@@ -55,6 +55,13 @@ const server = http.createServer((req, res) => {
         });
         return;
     }
+    if(req.method === "PUT" && req.url.startsWith('/itens/')){
+        const parte = req.url.split('/');
+        const id = parte[2];
+        res.writeHead(200, {'Content-type': 'text/plain'});
+        res.end(`Item ${id} atualizado`);
+        return;
+    }
     res.end();
 });
 
