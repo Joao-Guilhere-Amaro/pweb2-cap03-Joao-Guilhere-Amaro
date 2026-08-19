@@ -73,6 +73,10 @@ const server = http.createServer((req, res) => {
         res.writeHead(200, {'content-type': 'text/plain'});
         res.end('Configuração atualizada')
     }
+    if(req.method === "HEAD" && req.url === "/status"){
+        res.writeHead(200, {'X-Status': 'ok'});
+        res.end();
+    }
     res.end();
 });
 
